@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Megújuló energiák</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(to bottom right,#eeeeee,#bdbdbd);
+    min-height:100vh;
+}
+
+/* felső menüsáv */
+.navbar{
+    display:flex;
+    justify-content:flex-end;
+    gap:15px;
+    background:#333;
+    padding:10px 20px;
+}
+
+/* menü gomb */
+.nav-button{
+    background:transparent;
+    color:white;
+    border:1px solid white;
+    padding:6px 18px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.nav-button:hover{
+    background:white;
+    color:black;
+}
+
+/* dropdown */
+.dropdown{
+    position:relative;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    right:0;
+    top:40px;
+    background:#444;
+    min-width:180px;
+    border:1px solid #222;
+    z-index:10;
+}
+
+.dropdown-content button{
+    width:100%;
+    background:none;
+    border:none;
+    color:white;
+    padding:10px;
+    text-align:left;
+    cursor:pointer;
+}
+
+.dropdown-content button:hover{
+    background:#666;
+}
+
+/* oldal tartalom */
+.page{
+    display:none;
+    padding:40px;
+    text-align:center;
+    font-size:35px;
+    color:#333;
+}
+
+.page.active{
+    display:block;
+}
+</style>
+
+<script>
+function showPage(id){
+    document.querySelectorAll(".page").forEach(p=>{
+        p.classList.remove("active");
+    });
+    document.getElementById(id).classList.add("active");
+}
+
+function toggleMenu(id){
+    document.querySelectorAll(".dropdown-content").forEach(menu=>{
+        if(menu.id !== id) menu.style.display = "none";
+    });
+
+    const menu = document.getElementById(id);
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+</script>
+<body>
+
+<!-- felső menü -->
+<div class="navbar">
+
+    <div class="dropdown">
+        <button class="nav-button" onclick="toggleMenu('solar')">Napenergia</button>
+        <div id="solar" class="dropdown-content">
+            <button onclick="showPage('nap')">Megnyitás</button>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="nav-button" onclick="toggleMenu('windwater')">Szél és víz</button>
+        <div id="windwater" class="dropdown-content">
+            <button onclick="showPage('szelviz')">Megnyitás</button>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="nav-button" onclick="toggleMenu('biomass')">Biomassza</button>
+        <div id="biomass" class="dropdown-content">
+            <button onclick="showPage('bio')">Megnyitás</button>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="nav-button" onclick="toggleMenu('geo')">Geotermikus</button>
+        <div id="geo" class="dropdown-content">
+            <button onclick="showPage('geot')">Megnyitás</button>
+        </div>
+    </div>
+
+</div>
+
+<!-- oldalak -->
+<div id="nap" class="page active">
+    ☀ Napenergia<br><br>
+    A napenergiát napelemek segítségével alakítjuk elektromos árammá.
+</div>
+
+<div id="szelviz" class="page">
+    🌬️ Szélenergia & 🌊 Vízenergia<br><br>
+    A szél- és vízerőművek mozgási energiát hasznosítanak.
+</div>
+
+<div id="bio" class="page">
+    🌱 Biomassza<br><br>
+    Szerves anyagokból nyerhető megújuló energiaforrás.
+</div>
+
+<div id="geot" class="page">
+    🌋 Geotermikus energia<br><br>
+    A Föld belső hőjének hasznosítása fűtésre és áramtermelésre.
+</div>
+
+</body>
+</html>
+</head>
